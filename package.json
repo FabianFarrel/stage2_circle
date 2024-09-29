@@ -14,7 +14,15 @@
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@hookform/resolvers": "^3.9.0",
+<<<<<<< Updated upstream
     "framer-motion": "^11.3.31",
+=======
+    "@reduxjs/toolkit": "^2.2.7",
+    "@tanstack/react-query": "^5.56.2",
+    "axios": "^1.7.7",
+    "framer-motion": "^11.5.4",
+    "js-cookie": "^3.0.5",
+>>>>>>> Stashed changes
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.53.0",
@@ -24,6 +32,8 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
+    "@types/js-cookie": "^3.0.6",
+    "@types/node": "^22.7.4",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",

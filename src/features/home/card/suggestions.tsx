@@ -1,5 +1,4 @@
 import { Box, Heading, Card } from "@chakra-ui/react";
-import { AccFollowingCard } from "./acc-following-card"; 
 import { AccFollowCard } from "./acc-follow-card"; 
 
 export function SuggestionCard() {
@@ -19,9 +18,14 @@ export function SuggestionCard() {
                     as='h3'
                     my={'15px'}
                     bg={'#262626'}
+<<<<<<< Updated upstream
                     color={'#FFFFFF'}>Suggested for you</Heading>
+=======
+                    fontSize={25}
+                    color={'white'}>Suggested for you</Heading>
+>>>>>>> Stashed changes
                 <AccFollowCard/>
-                <AccFollowingCard/>
+                
             </Box>
         </Card>
     )

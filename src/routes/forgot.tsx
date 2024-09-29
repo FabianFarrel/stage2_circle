@@ -6,12 +6,13 @@ export function ForgotRoute() {
     return (
         <Box
             mx="auto"
-            width="350px"
+            width="100%"
+            height='729px'
             alignItems="center"
             justifyContent="center"
-            backgroundColor="black"  
+            backgroundColor="#1D1D1D"  
             p="20px"  
-            borderRadius="10px"  
+            borderRadius="0px"  
         >
             <Heading 
                 as='h1' 

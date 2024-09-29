@@ -16,7 +16,8 @@ export function ForgotForm() {
             display={"flex"}
             alignItems="center"
             textColor={'#FFFFFF'}
-            justifyContent="center">
+            justifyContent="center"
+            bg='#1D1D1D'>
 
             <FormControl 
                 width={'300px'}
@@ -48,7 +49,7 @@ export function ForgotForm() {
                     borderRadius={'15px'}
                     onClick={handleSubmit}
                     backgroundColor={'#04A51E'}
-                    _hover={{backgroundColor: '#FFFFFF', color: '#FFFFFF'}}>Send Instruction</Button>
+                    _hover={{backgroundColor: '#FFFFFF', color: '#FFFFFF'}}>Send</Button>
             </FormControl>
         </Box>
     );
