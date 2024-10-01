@@ -1,15 +1,12 @@
 import { Box } from "@chakra-ui/react";
+import { ProfileCard } from "../card/profile";
 import { SuggestionCard } from "../card/suggestions";
 import { MetaCard } from "../card/meta";
 
-export function SideRightProfileNavbar() {
+export function SideRightNavbar() {
     return (
-        <Box
-            right={'0'}
-            width={'402px'}
-            height={'100vh'}
-            position={'fixed'}
-            borderLeft={'1px solid #545454'}>
+        <Box>
+            <ProfileCard />
             <SuggestionCard />
             <MetaCard />    
         </Box>

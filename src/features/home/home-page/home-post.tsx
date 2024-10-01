@@ -1,5 +1,5 @@
-import { Box, Button, Input, Image } from "@chakra-ui/react";
-//import { LuImagePlus } from "react-icons/lu";
+import { Box, Button, FormControl, FormLabel, Input, Image } from "@chakra-ui/react";
+import { LuImagePlus } from "react-icons/lu";
 import { usePost } from "../hooks/use-post";
 import { ErrorMessage } from "../../auth/schemas/error";
 
@@ -50,15 +50,15 @@ export function HomePost() {
                 </Box>
 
                 <Box display={'flex'}>
-                    {/* <FormControl>
-                        <FormLabel
+                     {<FormControl>
+                         <FormLabel
                             cursor={'pointer'}
                             display={'flex'}
-                            color={'home.button.hoverText'}
+                            color={'green'}
                             fontSize={'25px'}><LuImagePlus /></FormLabel>
                         <Input type='file' {...register('image')} hidden />
                         <ErrorMessage message={errors.image?.message || ''} />
-                    </FormControl> */}
+                    </FormControl> }
 
                     <Button
                         type='submit'

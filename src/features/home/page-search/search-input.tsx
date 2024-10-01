@@ -1,28 +1,49 @@
-import { InputLeftElement, Input, InputGroup, Spinner, Text } from "@chakra-ui/react";
+import { InputLeftElement, Input, InputGroup, Box, VStack, Text, Button } from "@chakra-ui/react";
 import { RiUserSearchLine } from "react-icons/ri";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { apiV1 } from "../../../libs/api";
-
-interface User {
-    id: number;
-    name: string;
-}
+import { UserEntity } from "../../../entities/user";
+import { SearchResult } from "./search-result";
+import Cookies from 'js-cookie';
 
 export function SearchInput() {
-    const [query, setQuery] = useState('');
-    const [result, setResult] = useState<User[]>([]); 
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState<string | null>(null);
-
-    const handleSearch = async () => {
-        setLoading(true);
-        setError(null);
+    const [searchQuery, setSearchQuery] = useState<string>('');
+    const [result, setResult] = useState<UserEntity[]>([]);
+    const [loading, setLoading] = useState<boolean>(false);
+    const token = Cookies.get('token');
+    let userLogin = null;
+    useEffect(() => {
+        search();
+    }, [searchQuery])
+    if (token) {
         try {
-            const response = await apiV1.get<User[]>(`/search/users?q=${query}`);
-            setResult(response.data); 
-        } catch (err) {
-            setError('An error occurred while fetching results.');
-            console.log(err);
+            const payloadBase64 = token.split('.')[1];
+            if (payloadBase64) {
+                const decodedPayload = JSON.parse(atob(payloadBase64));
+                userLogin = decodedPayload;
+            }
+        } catch (error) {
+            console.error('Failed to decode token:', error);
+        }
+    }
+
+    const search = async () => {
+        setLoading(true);
+        try {
+            const response = await apiV1.get<UserEntity[]>('/search', {
+                params: {
+                    query: searchQuery
+                },
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            const filterUser = response.data.filter(
+                (user) => user.id !== userLogin?.id
+            );
+            setResult(filterUser);
+        } catch (error) {
+            console.error(error);
         }
         setLoading(false);
     }
@@ -34,7 +55,7 @@ export function SearchInput() {
                 alignItems={'center'}
                 justifyContent={'center'}>
                 <InputLeftElement
-                    left={'43px'}
+                    left={'25px'}
                     fontSize={'20px'}
                     pointerEvents="none"
                     children={<RiUserSearchLine style={{ color: '#B2B2B2', backgroundColor: '#3F3F3F' }} />} />
@@ -47,30 +68,14 @@ export function SearchInput() {
                     width={'600px'}
                     height={'25px'}
                     fontSize={'14px'}
-                    color={'home.text'}
+                    color={'white'}
                     fontWeight={'bold'}
                     borderRadius={'25px'}
                     border={'1px solid #3F3F3F'}
-                    placeholder="Search your friend" 
-                    onChange={(e) => setQuery(e.target.value)} />
-                
-                <button onClick={handleSearch}>Search</button>
+                    placeholder="Search your friend"
+                    onChange={(e) => setSearchQuery(e.target.value)} />
             </InputGroup>
-
-            {/* Display loading state */}
-            {loading && <Spinner mt={4} />}
-
-            {/* Display error message */}
-            {error && <Text color="red.500" mt={4}>{error}</Text>}
-
-            {/* Display search results */}
-            {result.length > 0 && (
-                <ul>
-                    {result.map((user) => (
-                        <li key={user.id}>{user.name}</li> 
-                    ))}
-                </ul>
-            )}
+            <SearchResult result={result} />
         </>
     )
 }

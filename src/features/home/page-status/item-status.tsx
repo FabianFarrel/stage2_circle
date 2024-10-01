@@ -1,10 +1,9 @@
 import { Box, Image, Text } from "@chakra-ui/react";
-import { FaComments, FaHeart } from "react-icons/fa";
-import { useReplyForm } from "../hooks/use-reply";
-import { ButtonLink } from "../buttons/link";
+import { useAllReplies } from "../hooks/use-all";
+import LikeButton from "../buttons/like";
 
 export function StatusItem() {
-    const { data } = useReplyForm();
+    const { data } = useAllReplies();
 
     return (
         <>
@@ -31,7 +30,7 @@ export function StatusItem() {
                                     fontWeight={'bold'}>{reply.author.fullName}
                                     <Text
                                         as={'span'}
-                                        color={'white'}
+                                        color={'home.link'}
                                         ms={'3px'}>@{reply.author.userName} • 4h</Text>
                                 </Text>
 
@@ -43,21 +42,11 @@ export function StatusItem() {
                                     display={'flex'}
                                     fontSize={'20px'}
                                     alignItems={'center'}>
-                                    <FaHeart style={{ color: 'red' }} />
+                                    <LikeButton postId={reply.id} />
                                     <Text
-                                        ms={'5px'}
                                         as={'span'}
-                                        color={'white'}
+                                        color={'home.link'}
                                         fontSize={'12px'}>{reply.likesCount}</Text>
-
-                                    <FaComments style={{ color: '#909090', marginLeft: '20px' }} />
-                                    <ButtonLink to={"/status"} display={'flex'} >
-                                        <Text
-                                            ms={'5px'}
-                                            as={'span'}
-                                            color={'white'}
-                                            fontSize={'12px'}>{reply.repliesCount} Replies</Text>
-                                    </ButtonLink>
                                 </Text>
                             </Box>
                         </Box>

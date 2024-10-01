@@ -35,13 +35,28 @@ export function HomeItem() {
                                     <Text
                                         as={'span'}
                                         color={'white'}
-                                        ms={'3px'}>@{post.author.userName} • 4h</Text>
+                                        ms={'3px'}>@{post.author.userName} • {post.timeAgo}</Text>
                                 </Text>
 
                                 <Text
                                     fontSize={'12px'}
                                     color={'white'}
                                     mt={'5px'}>{post.content}</Text>
+
+{post.image !== null && (
+    <Image 
+        src={post.image}
+        alt="Post Image"
+        borderRadius="md" 
+        boxSize="300px" 
+        objectFit="cover" 
+        margin="10px auto" 
+        boxShadow="lg" 
+        transition="transform 0.2s" 
+        
+    />
+)}
+
                                 <Text
                                     mt={'15px'}
                                     display={'flex'}
@@ -50,14 +65,16 @@ export function HomeItem() {
                                     <LikeButton postId={post.id}  />
                                     <Text
                                         as={'span'}
-                                        mb={'15px'}
+                                        mb={'1px'}
+                                        
                                         color={'white'}
                                         fontSize={'12px'}>{post.likesCount}</Text>
 
-                                    <FaComments style={{ color: '#909090', marginLeft: '20px',marginBottom:'15px' }} />
+                                    <FaComments style={{ color: '#909099', marginLeft: '20px',marginBottom:'5px',marginTop:'5px' }} />
                                     <ButtonLink state={post.id} to={`/status/${post.id}`} display={'flex'}>
                                         <Text
-                                            mb={'15px'}
+                                            mb={'1px'}
+                                            
                                             ms={'5px'}
                                             as={'span'}
                                             color={'white'}

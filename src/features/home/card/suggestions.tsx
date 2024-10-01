@@ -18,12 +18,8 @@ export function SuggestionCard() {
                     as='h3'
                     my={'15px'}
                     bg={'#262626'}
-<<<<<<< Updated upstream
-                    color={'#FFFFFF'}>Suggested for you</Heading>
-=======
                     fontSize={25}
                     color={'white'}>Suggested for you</Heading>
->>>>>>> Stashed changes
                 <AccFollowCard/>
                 
             </Box>

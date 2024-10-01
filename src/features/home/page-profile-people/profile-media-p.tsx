@@ -1,6 +1,5 @@
 import { Box, Image } from "@chakra-ui/react";
 
-
 export function ProfileMediaPeople() {
     return (
         <Box

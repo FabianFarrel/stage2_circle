@@ -3,14 +3,6 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: UserStoreDTO = {} as UserStoreDTO;
 
-export const fetchDummyUser = createAsyncThunk(
-    "user/fetchDummyUsers",
-    async () => {
-        const response = await fetch ("https://jsonplaceholder.typicode.com/users");
-        return response.json();
-    }
-);
-
 const authSlice = createSlice({
     name: "auth",
     initialState,
@@ -28,14 +20,7 @@ const authSlice = createSlice({
             return {} as UserStoreDTO;
         }
     },
-    extraReducers: (builder) => {
-        builder.addCase(fetchDummyUser.fulfilled, (state, action) => {
-            return {
-                ...state,
-                test: action.payload
-            }
-        })
-    }
+   
 });
 
 export const { setUser, removeUser } = authSlice.actions;

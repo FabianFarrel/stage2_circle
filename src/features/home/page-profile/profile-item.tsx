@@ -13,7 +13,7 @@ export function ProfilePost() {
     const { data } = usePost();
     if (!data || data.length === 0) {
         return <Box justifyContent={'center'} display={'flex'} alignItems={'center'} flexDirection={'column'} mt={'30px'} pb={'15px'}>
-        <Heading as={'text'} color={'nav.text'} fontSize={'15px'}>I think you dont have any post yet</Heading>
+        <Heading as={'text'} color={'white'} fontSize={'15px'}>I think you dont have any post yet</Heading>
         <Button
         border={'none'}
         height={'35px'}

@@ -1,24 +1,3 @@
-<<<<<<< Updated upstream
-import { useState } from "react"
-import { LoginForm } from "../types"
-
-export function useLoginForm() {
-    const [form, setForm] = useState<LoginForm>({
-        email: '',
-        password: '',
-    });
-
-    function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-        setForm({ ...form, [e.target.name]: e.target.value })
-    };
-
-    function handleSubmit(e: React.FormEvent) {
-        e.preventDefault();
-        console.log(form);
-    };
-
-    return { form, handleChange, handleSubmit };
-=======
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
 import Cookies from "js-cookie";
@@ -26,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { setUser } from '../../../store/auth-slice';
 import { useAppDispatch } from '../../../store/use-store';
-import { LoginFormInputs, loginSchema } from '../schemas/login';
+import { LoginFormInput, loginSchema } from '../schemas/login';
 import { LoginRequestDTO, LoginResponseDTO } from '../types/login-dto';
 import { apiV1 } from '../../../libs/api';
 
@@ -35,14 +14,14 @@ export function useLoginForm() {
         register,
         handleSubmit,
         setError,
-        formState: { errors }, } = useForm<LoginFormInputs>({
+        formState: { errors }, } = useForm<LoginFormInput>({
             resolver: zodResolver(loginSchema)
         });
 
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
-    async function onSubmit(data: LoginFormInputs) {
+    async function onSubmit(data: LoginFormInput) {
         try {
             const response = await apiV1.post<
                 null,
@@ -84,5 +63,4 @@ export function useLoginForm() {
         errors,
         onSubmit,
     };
->>>>>>> Stashed changes
 }

@@ -22,7 +22,7 @@ export function MetaCard() {
                     bg={'#262626'}
                     display={'flex'}
                     fontSize={'14px'}
-                    color={'#FFFFFF'}>Developed by Handika • 
+                    color={'#FFFFFF'}>Developed by Fabian • 
                         <AiOutlineGithub 
                             fontSize={'20px'} style={{backgroundColor: '#262626', marginLeft: '5px', color:'#B2B2B2'}}/>
                         <FaLinkedin 

@@ -1,29 +1,25 @@
-import { Box, Image, Text } from "@chakra-ui/react";
-import FollowButton from "../buttons/follow";
-import { ButtonLink } from "../buttons/link";
-import { useAllUsers } from "../hooks/use-all";
+import { Box, Text, VStack, Image } from "@chakra-ui/react";
 import { UserEntity } from "../../../entities/user";
-import { useEffect, useState } from "react";
+import { SearchNoResult } from "./search-no-result";
+import { FaComments } from "react-icons/fa";
+import LikeButton from "../buttons/like";
+import { ButtonLink } from "../buttons/link";
+import FollowButton from "../buttons/follow";
 
+interface SearchResultProps {
+    result: UserEntity[];
+}
 
-export function AccFollowCard() {
-    const { data } = useAllUsers();
-    const [randomUsers, setRandomUsers] = useState<UserEntity[]>([]);
-    const getRandomUsers = (users: UserEntity[]): UserEntity[] => {
-        if (!users || users.length === 0) return [];
-        const shuffled = users.sort(() => 0.5 - Math.random());
-        return shuffled.slice(0, 3);
-    };
-    useEffect(() => {
-        if (data) {
-            const selectedUsers = getRandomUsers(data);
-            setRandomUsers(selectedUsers);
-        }
-    }, [data]);
-    
+export function SearchResult({ result }: SearchResultProps) {
+    if (result.length === 0) {
+        return (
+            <SearchNoResult />
+        );
+    }
+
     return (
         <>
-            {randomUsers?.map((user) => {
+            {result.map((user) => {
                 return (
                     <Box
                         mt={'13px'}
@@ -64,8 +60,7 @@ export function AccFollowCard() {
                         </Box>
                     </Box>
                 )
-            })
-            }
+            })}
         </>
-    )
+    );
 }

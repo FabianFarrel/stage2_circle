@@ -1,10 +1,9 @@
-
 import { Text } from "@chakra-ui/react";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { HomeItem } from "../home-page/home-item";
 import { StatusItem } from "../page-status/item-status";
 import { StatusReply } from "../page-status/reply-status";
-import { ButtonLink } from "../link/link";
+import { ButtonLink } from "../buttons/link";
 
 export function LayoutStatus() {
     return (

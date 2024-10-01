@@ -1,20 +1,4 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-<<<<<<< Updated upstream
-import { LoginRoute } from "./login"; 
-import { RegisterRoute } from "./register"; 
-
-export function AppRouter() {
-  const router = createBrowserRouter([
-    {
-      path: "/login",
-      element: <LoginRoute />,
-    },
-    {
-      path: "/register",
-      element: <RegisterRoute />,
-    },
-  ]);
-=======
 //import { DetailLayout } from "../features/home/layout/layout-detail";
 import { ProfileLayout } from "../features/home/layouts/layout-profile";
 import { ProfilePeopleLayout } from "../features/home/layouts/layout-profile-p";
@@ -47,14 +31,13 @@ export function AppRouter() {
                     element: <ProfileLayout />,
                 },
                 {
-                    path: "profile-people",
+                    path: "profile-people/:userId",
                     element: <ProfilePeopleLayout />,
                 },
                 {
                     path: "search",
                     element: <SearchLayout />,
                 },
-
                 {
                     path: "follow",
                     element: <FollowLayout />,
@@ -79,7 +62,6 @@ export function AppRouter() {
             element: <ForgotRoute />,
         },
     ]);
->>>>>>> Stashed changes
 
   return <RouterProvider router={router} />;
 }

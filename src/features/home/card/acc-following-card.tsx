@@ -14,8 +14,8 @@ export function AccFollowingCard() {
                         borderRadius='500px'
                         src='' />
 
-                    <Text as={'p'} fontSize={'12px'} bg={'#262626'} color={'#FFFFFF'} ms={'10px'} fontWeight={'bold'}>Handika
-                        <Text fontSize={'10px'} bg={'#262626'} color={'#909090'}>@Handika</Text>
+                    <Text as={'p'} fontSize={'12px'} bg={'#262626'} color={'#FFFFFF'} ms={'10px'} fontWeight={'bold'}>Farrel
+                        <Text fontSize={'10px'} bg={'#262626'} color={'#909090'}>@Rel</Text>
                     </Text>
                     </Box>
                     <Spacer bg={'#262626'}/>

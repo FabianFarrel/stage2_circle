@@ -1,83 +1,105 @@
-
-import { Box, Button, HStack, Image, Text } from "@chakra-ui/react";
+import { Box, HStack, Image, Text } from "@chakra-ui/react";
+import { useAllUsersById } from "../hooks/use-all";
+import { ButtonLink } from "../buttons/link";
+import { IoIosArrowRoundBack } from "react-icons/io";
+import { useParams } from "react-router-dom";
+import FollowButton from "../buttons/follow";
 
 export function ProfileStatusPeople() {
+    const { data } = useAllUsersById();
+    const { userId } = useParams<{ userId: string }>();
     return (
-        <Box
-            mt={'10px'}
-            px={'25px'}
-            alignItems={'center'}>
-            <Image
-                width={'100%'}
-                height={'100px'}
-                display={'block'}
-                borderRadius='10px'
-                src=''/>
-
-            <Box
-                mt={'-35px'}
-                display={'flex'} 
-                alignItems={'center'} 
-                justifyContent={'space-between'} >
-                <Image
-                    alt=''
-                    ms={'20px'}
-                    boxSize='80px'
-                    display={'block'}
-                    borderRadius='500px'
-                    border={'3px solid black'}
-                    src='' />
-
-                <Button
-                    mt={'45px'}
-                    width={'25%'}
-                    height={'28px'}
+        <>
+            <ButtonLink to={"/"} textDecoration={'none'}>
+                <Text
+                    as={'h2'}
+                    mt={'15px'}
+                    px={'25px'}
+                    display={'flex'}
                     color={'white'}
-                    fontSize={'10px'}
-                    fontWeight={'700'}
-                    bg={'transparent'}
-                    borderRadius={'20px'}
-                    border={'1px solid #FFFFFF'}>Follow</Button>
-            </Box>
-
+                    alignItems={'center'}
+                    transition={"color 0.2s ease-in-out"}
+                    _hover={{ color: 'nav.button.hoverText' }}>
+                    <IoIosArrowRoundBack style={{ marginRight: '5px', fontSize: '30px' }} />✨ {data?.fullName} ✨</Text>
+            </ButtonLink>
             <Box
                 mt={'10px'}
-                color={'white'}
-                bg={'transparent'}>
-                <Text
-                    fontSize="16px"
-                    fontWeight="bold"
-                    bg={'transparent'}>✨ Fabian ✨</Text>
+                px={'25px'}
+                alignItems={'center'}
+                color={'white'}>
+                <Image
+                    width={'100%'}
+                    height={'100px'}
+                    display={'block'}
+                    borderRadius='10px'
+                    src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQl4u76xJAm7BiHyeq_CQT4cuBP6bL9r1byrw&s' />
 
-                <Text
-                    my={'1'}
-                    fontSize="13px"
-                    color={'home.link'}
-                    bg={'transparent'}>@Fab</Text>
+                <Box
+                    mt={'-35px'}
+                    display={'flex'}
+                    alignItems={'center'}
+                    justifyContent={'space-between'}>
+                    <Image
+                        alt=''
+                        ms={'20px'}
+                        boxSize='80px'
+                        display={'block'}
+                        borderRadius='500px'
+                        border={'3px solid black'}
+                        src='https://images.unsplash.com/photo-1667053508464-eb11b394df83?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww' />
 
-                <Text
-                    my="1"
-                    fontSize="13px"
-                    bg={'transparent'}>Picked over by the worms, and weird fishes.</Text>
+                    <Text
+                        mt={'50px'}
+                        width={'25%'}
+                        height={'28px'}
+                        fontSize={'10px'}
+                        fontWeight={'700'}
+                        bg={'transparent'}>
+                        <FollowButton userId={userId as any} />
+                    </Text>
+                </Box>
 
-                <HStack bg={'transparent'}>
-                    <Text 
-                        fontSize="13px" 
-                        bg={'transparent'}>291 
-                        <Text 
-                            as={'span'} 
-                            color={'home.link'} 
-                            bg={'transparent'}> Following</Text></Text>
+                <Box
+                    mt={'10px'}
+                    color={'white'}
+                    bg={'transparent'}>
+                    <Text
+                        fontSize="16px"
+                        fontWeight="bold"
+                        bg={'transparent'}>✨ {data?.fullName} ✨</Text>
 
-                    <Text 
-                        fontSize="13px" 
-                        bg={'transparent'}>23 
-                        <Text 
-                            as={'span'} 
-                            color={'home.link'} 
-                            bg={'transparent'}> Followers</Text></Text>
-                </HStack>
+                    <Text
+                        my={'1'}
+                        fontSize="13px"
+                        color={'home.link'}
+                        bg={'transparent'}>@{data?.userName}</Text>
+
+                    <Text
+                        my="1"
+                        fontSize="13px"
+                        bg={'transparent'}>{data?.bio}</Text>
+
+                    <HStack bg={'transparent'}>
+                        <Text
+                            fontSize="13px"
+                            bg={'transparent'}>{data?.following}</Text>
+                        <Text
+                            as={'span'}
+                            fontSize="13px"
+                            color={'home.link'}
+                            bg={'transparent'}> Following</Text>
+
+                        <Text
+                            fontSize="13px"
+                            bg={'transparent'}>{data?.followers}</Text>
+                        <Text
+                            fontSize="13px"
+                            as={'span'}
+                            color={'home.link'}
+                            bg={'transparent'}> Followers</Text>
+                    </HStack>
+                </Box>
             </Box>
-        </Box>
+        </>
     )
 }

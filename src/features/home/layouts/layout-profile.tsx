@@ -1,4 +1,3 @@
-
 import { Text } from "@chakra-ui/react";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { ButtonLink } from "../buttons/link";

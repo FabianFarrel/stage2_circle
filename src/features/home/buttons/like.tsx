@@ -8,7 +8,7 @@ interface LikeButtonProps {
     postId: number
 }
 
-const LikeButton: React.FC<LikeButtonProps> = ({ postId }) => {
+const LikeButtonPost: React.FC<LikeButtonProps> = ({ postId }) => {
     const [isLiked, setIsLiked] = React.useState(false);
     const [likeCount, setLikeCount] = React.useState(0);
 
@@ -16,8 +16,7 @@ const LikeButton: React.FC<LikeButtonProps> = ({ postId }) => {
         const fetchLike = async () => {
             const response = await apiV1.get(`/post/${postId}/like`, {
                 headers: {
-                    Authorization: `Bearer ${Cookies.get("token")}`,
-                    'Content-Type': 'multipart/form-data',
+                    Authorization: `Bearer ${Cookies.get("token")}`
                 }
             });
             setIsLiked(response.data.isLiked);
@@ -29,8 +28,7 @@ const LikeButton: React.FC<LikeButtonProps> = ({ postId }) => {
     const handleLike = async () => {
         await apiV1.post(`/post/${postId}/like`, {}, {
             headers: {
-                Authorization: `Bearer ${Cookies.get("token")}`,
-                'Content-Type': 'multipart/form-data',
+                Authorization: `Bearer ${Cookies.get("token")}`
             }
         });
         setIsLiked((prev) => !prev);
@@ -42,9 +40,8 @@ const LikeButton: React.FC<LikeButtonProps> = ({ postId }) => {
     return (
         <ButtonLink fontSize={'12px'} to={''} onClick={handleLike} >
             {isLiked ? likeIconRed : likeIconGray}
-            <span style={{ fontSize: '12px' }}>{likeCount}</span>
         </ButtonLink>
     );
 }
 
-export default LikeButton;
+export default LikeButtonPost;

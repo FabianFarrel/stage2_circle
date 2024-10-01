@@ -1,27 +1,5 @@
-<<<<<<< Updated upstream
-import React, { useState } from "react";
-import { RegisterForm } from "../types";
-
-export function useRegisterForm() {
-    const [form, setForm] = useState<RegisterForm>({
-        fullName: "",
-        email: "",
-        password: "",
-    });
-
-    function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-        setForm({ ...form, [e.target.name]: e.target.value });
-    };
-
-    function handleSubmit(e: React.FormEvent) {
-        e.preventDefault();
-        console.log(form);
-    };
-
-    return { form, handleChange, handleSubmit };
-=======
 import { zodResolver } from '@hookform/resolvers/zod';
-import { RegisterFormInputs, registerSchema } from '../schemas/register';
+import { RegisterFormInput, registerSchema } from '../schemas/register';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import Cookies from "js-cookie";
@@ -36,14 +14,14 @@ export function useRegisterForm() {
         register,
         handleSubmit,
         setError,
-        formState: { errors }, } = useForm<RegisterFormInputs>({
+        formState: { errors }, } = useForm<RegisterFormInput>({
             resolver: zodResolver(registerSchema)
         });
 
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
-    async function onSubmit(data: RegisterFormInputs) {
+    async function onSubmit(data: RegisterFormInput) {
         try {
             const response = await apiV1.post<
                 null,
@@ -91,5 +69,4 @@ export function useRegisterForm() {
         errors,
         onSubmit,
     };
->>>>>>> Stashed changes
 }

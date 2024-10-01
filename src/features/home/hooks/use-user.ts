@@ -34,7 +34,11 @@ export function useUser() {
     
     async function updateUser(data: UpdateUserDTO) {
         const response = await apiV1.put<null, { data: UserEntity }>(
-            '/user', data
+            `/user`, data, {
+                headers: {
+                    Authorization: `Bearer ${Cookies.get("token")}`
+                }
+            }
         );
         
         queryClient.invalidateQueries({ queryKey: ['user'] });
