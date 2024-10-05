@@ -18,13 +18,13 @@ model User {
   email    String @unique
   password String
 
-  fullName  String?
-  userName  String?
-  bio       String?
-  following Follow[] @relation("Following")
-  followers Follow[] @relation("Followers")
-
-  role RoleEnum @default(MEMBER)
+  fullName   String?
+  userName   String?
+  bio        String?
+  image      String?  @default("https://static.vecteezy.com/system/resources/previews/018/765/757/original/user-profile-icon-in-flat-style-member-avatar-illustration-on-isolated-background-human-permission-sign-business-concept-vector.jpg")
+  background String?  @default("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQl4u76xJAm7BiHyeq_CQT4cuBP6bL9r1byrw&s")
+  following  Follow[] @relation("Following")
+  followers  Follow[] @relation("Followers")
 
   post  Post[]
   reply Reply[]
@@ -50,7 +50,7 @@ model Post {
   like  Like[]
 
   authorId Int
-  author   User @relation(fields: [authorId], references: [id])
+  author   User @relation(fields: [authorId], references: [id], onDelete: Cascade)
 
   @@map("post")
 }
@@ -66,10 +66,10 @@ model Reply {
   updatedAt DateTime @updatedAt
 
   postId Int
-  post   Post @relation(fields: [postId], references: [id])
+  post   Post @relation(fields: [postId], references: [id], onDelete: Cascade)
 
   authorId Int
-  author   User @relation(fields: [authorId], references: [id])
+  author   User @relation(fields: [authorId], references: [id], onDelete: Cascade)
 
   @@map("reply")
 }
@@ -77,10 +77,10 @@ model Reply {
 model Follow {
   id         Int  @id @default(autoincrement())
   followerId Int
-  follower   User @relation("Followers", fields: [followerId], references: [id])
+  follower   User @relation("Followers", fields: [followerId], references: [id], onDelete: Cascade)
 
   followingId Int
-  following   User @relation("Following", fields: [followingId], references: [id])
+  following   User @relation("Following", fields: [followingId], references: [id], onDelete: Cascade)
 
   isFollowing Boolean @default(false)
 
@@ -101,9 +101,4 @@ model Like {
 
   @@unique([userId, postId])
   @@map("like")
-}
-
-enum RoleEnum {
-  ADMIN
-  MEMBER
 }

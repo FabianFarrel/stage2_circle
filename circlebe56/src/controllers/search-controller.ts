@@ -3,8 +3,22 @@ import { searchService } from '../services/search-service';
 import { RequestWithUser } from '../types/post';
 
 export const searchController = async (req: RequestWithUser, res: Response) => {
-    const { query } = req.query
     const userId = req.user?.id;
-    const user = await searchService(query as string, userId)
-    res.json(user)
-}
+    const { query } = req.query as { query?: string }; 
+
+    if (!query) {
+        return res.status(400).json({ message: "Query is required" });
+    }
+
+    try {
+        const users = await searchService(query, userId);
+        return res.json(users);
+    } catch (error: unknown) {
+
+        if (error instanceof Error) {
+            return res.status(500).json({ message: error.message });
+        } else {
+            return res.status(500).json({ message: "An unexpected error occurred." });
+        }
+    }
+};

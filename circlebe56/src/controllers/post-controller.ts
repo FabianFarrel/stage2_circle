@@ -16,7 +16,8 @@ class postController {
                 author: {
                     select: {
                         fullName: true,
-                        userName: true
+                        userName: true,
+                        image: true
                     }
                 },
             },
@@ -63,12 +64,35 @@ class postController {
     }
 
     async createPost(req: RequestWithUser, res: Response) {
-        const image = await cloudinaryService.upload(req.file)
-        const body = {...req.body, image: image.secure_url}
-        const value = await postSchema.validateAsync(body);
-        const createPost = await postService.createPost(value, req.user.id);
-        res.json(createPost)
+        try {
+            let imageUrl = null;
+            
+            if (req.file) {
+                const image = await cloudinaryService.upload(req.file);
+                imageUrl = image.secure_url;
+            }
+
+            const body = { ...req.body, image: imageUrl || undefined };  
+    
+            const value = await postSchema.validateAsync(body);
+    
+            const createPost = await postService.createPost(value, req.user.id);
+            
+            res.json({ success: true, data: createPost });
+        } catch (error) {
+
+            if (error instanceof Error) {
+                console.error("Error creating post:", error.message);
+                res.status(500).json({ success: false, message: error.message, stack: error.stack });
+            } else {
+                
+                console.error("An unexpected error occurred:", error);
+                res.status(500).json({ success: false, message: "An unexpected error occurred." });
+            }
+        }
     }
+    
+    
 
     async updatePost(req: RequestWithUser, res: Response) {
         const id = Number(req.params.id);
