@@ -1,10 +1,12 @@
-import { Box, Button, FormControl, FormLabel, Input, Image } from "@chakra-ui/react";
+import { Box, Button, FormControl, FormLabel, Input, Image, Spinner } from "@chakra-ui/react";
 import { LuImagePlus } from "react-icons/lu";
 import { usePost } from "../hooks/use-post";
 import { ErrorMessage } from "../../auth/schemas/error";
+import { useUser } from "../hooks/use-user";
 
 export function HomePost() {
     const { register, handleSubmit, errors, onSubmit, isSubmitting } = usePost();
+    const { data } = useUser();
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
@@ -27,7 +29,7 @@ export function HomePost() {
                         boxSize='40px'
                         display={'block'}
                         borderRadius='500px'
-                        src='https://images.unsplash.com/photo-1667053508464-eb11b394df83?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHwwv' />
+                        src={data?.image} />
 
                     <Input
                         type='text'
@@ -36,7 +38,7 @@ export function HomePost() {
                         width={'300px'}
                         height={'25px'}
                         fontSize={'14px'}
-                        color={'white'}
+                        color={'#b8b8b8'}
                         fontWeight={'bold'}
                         {...register('content')}
                         placeholder="What is happening?!"
@@ -50,15 +52,15 @@ export function HomePost() {
                 </Box>
 
                 <Box display={'flex'}>
-                     {<FormControl>
-                         <FormLabel
+                    <FormControl>
+                        <FormLabel
                             cursor={'pointer'}
                             display={'flex'}
                             color={'green'}
                             fontSize={'25px'}><LuImagePlus /></FormLabel>
-                        <Input type='file' {...register('image')} hidden />
+                        <Input type='file' {...register('image')} hidden name="image" />
                         <ErrorMessage message={errors.image?.message || ''} />
-                    </FormControl> }
+                    </FormControl>
 
                     <Button
                         type='submit'
@@ -73,7 +75,9 @@ export function HomePost() {
                         disabled={isSubmitting}
                         color={'white'}
                         backgroundColor={'green'}
-                        _hover={{ backgroundColor: 'home.button.hoverBackground', color: 'home.button.hoverText' }}>Post</Button>
+                        _hover={{ backgroundColor: 'home.button.hoverBackground', color: 'home.button.hoverText' }}>
+                        {isSubmitting ? <Spinner size="sm" /> : 'Post'}
+                    </Button>
                 </Box>
             </Box>
         </form>

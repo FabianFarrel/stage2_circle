@@ -1,8 +1,8 @@
-import { UserEntity } from "../../../entities/user";
+import { UpdateUserEntity } from "../../../entities/user";
 
-export type UserDTO = UserEntity;
+export type UserDTO = UpdateUserEntity;
 
 export type UpdateUserDTO = Pick<
-    UserEntity, 
-    'fullName' | 'userName' | 'bio'
+    UserDTO,
+    'fullName' | 'userName' | 'bio' | 'image' | 'background'
 >;

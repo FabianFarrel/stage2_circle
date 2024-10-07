@@ -1,11 +1,18 @@
 import { Box } from "@chakra-ui/react";
-//import { HomeItem } from "../home-page/home-item";
 import { DetailReply } from "./reply-detail";
+import { DetailItem } from "./item-detail";
+import { DetailPost } from "./post-detail";
 
-export function DetailRightNavbar() {
+interface DetailRightNavbarProps {
+    selectedPostId: number | null;
+}
+
+export function DetailRightNavbar({ selectedPostId }: DetailRightNavbarProps) {
     return (
         <Box>
-            <DetailReply />
+            <DetailPost  selectedPostId={selectedPostId}/>
+            <DetailReply selectedPostId={selectedPostId}/>
+            <DetailItem selectedPostId={selectedPostId} />
         </Box>
     )
 }

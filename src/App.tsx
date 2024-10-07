@@ -12,18 +12,19 @@ function App() {
   async function checkAuth() {
     const { data } = await apiV1.get<null, { data: UserStoreDTO }>("/auth/check", {
       headers: {
-        Authorization: `Bearer ${Cookies.get("token")}`
+        Authorization: `Bearer ${Cookies.get("token")}`  
       }
     })
 
-    dispatch(setUser(data))
+    dispatch(setUser(data))  
   }
 
   useEffect(() => {
-    checkAuth();
+    checkAuth(); 
   }, []);
 
-  return <AppRouter />
+  return <AppRouter /> 
 }
+
 
 export default App

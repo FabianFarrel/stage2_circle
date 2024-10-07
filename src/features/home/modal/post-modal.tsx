@@ -1,8 +1,10 @@
 // import {  } from "@chakra-ui/modal";
-import { Avatar, Box, Button, FormControl,FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalOverlay, Textarea } from "@chakra-ui/react";
+import { Avatar, Box, Button, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalOverlay, Textarea } from "@chakra-ui/react";
 import { RefObject } from "react";
 import { LuImagePlus } from "react-icons/lu";
 import { usePost } from "../hooks/use-post";
+import { ErrorMessage } from "../../auth/schemas/error";
+import { useUser } from "../hooks/use-user";
 
 interface InitialFocusModalProps {
     isOpen: boolean;
@@ -12,18 +14,19 @@ interface InitialFocusModalProps {
 }
 
 export function PostModal({ isOpen, onClose, initialRef, finalRef }: InitialFocusModalProps) {
-    const { register, handleSubmit, onSubmit } = usePost();
-
+    const { register, handleSubmit, errors, onSubmit } = usePost();
+    const { data } = useUser();
+    
     return (
         <>
             <Modal
                 onClose={onClose}
                 isOpen={isOpen}
                 finalFocusRef={finalRef}
-                initialFocusRef={initialRef}>
+                initialFocusRef={initialRef} >
                 <ModalOverlay
                     backdropFilter="blur(10px)"
-                    backgroundColor="rgba(128, 128, 128,0.1)" />
+                    backgroundColor="rgba(128, 128, 128,0.1)" color={'white'}/>
 
                 <ModalContent
                     minW="45vw"
@@ -31,8 +34,8 @@ export function PostModal({ isOpen, onClose, initialRef, finalRef }: InitialFocu
                     overflow="auto"
                     background="#1D1D1D"
                     borderRadius={"15px"}>
-                    <form onSubmit={handleSubmit(onSubmit)}>
-                        <ModalBody pb={6}>
+                    <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
+                        <ModalBody pb={6} color={'white'}>
                             <Box
                                 mb="10px"
                                 mt={'10px'}
@@ -45,13 +48,13 @@ export function PostModal({ isOpen, onClose, initialRef, finalRef }: InitialFocu
                                     m={"5px 2px"}
                                     rounded="full"
                                     fontSize={"7px"}
-                                    color="white"
+                                    color="home.link"
                                     fontWeight={"bold"}
                                     border="1.5px solid #909090" />
                             </Box>
 
                             <FormControl display="flex">
-                                <Avatar src={'https://images.unsplash.com/photo-1667053508464-eb11b394df83?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww'}></Avatar>
+                                <Avatar src={data?.image}></Avatar>
 
                                 <Textarea
                                     width="100%"
@@ -81,7 +84,8 @@ export function PostModal({ isOpen, onClose, initialRef, finalRef }: InitialFocu
                                 cursor={'pointer'}
                                 color={'green'}
                                 fontSize={'30px'}><LuImagePlus /></FormLabel>
-                            <Input type='file' {...register('image')} hidden />
+                            <Input type='file' {...register('image')} hidden name="image"/>
+                            <ErrorMessage message={errors.image?.message || ''} />
                         </FormControl>
                         <Button
                             border={'none'}

@@ -1,12 +1,15 @@
-import { Box, Button, Input, Image } from "@chakra-ui/react";
+import { Box, Button, FormControl, FormLabel, Input, Image } from "@chakra-ui/react";
+import { LuImagePlus } from "react-icons/lu";
 import { useReplyForm } from "../hooks/use-reply";
-
+import { ErrorMessage } from "../../auth/schemas/error";
+import { useUser } from "../hooks/use-user";
 
 export function StatusReply() {
-    const { register, handleSubmit, onSubmit } = useReplyForm();
+    const { register, handleSubmit, errors, onSubmit } = useReplyForm();
+    const { data } = useUser();
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
             <Box
                 mt={'20px'}
                 px={'25px'}
@@ -26,7 +29,7 @@ export function StatusReply() {
                         boxSize='40px'
                         display={'block'}
                         borderRadius='500px'
-                        src='https://images.unsplash.com/photo-1667053508464-eb11b394df83?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww' />
+                        src={data?.image} />
 
                     <Input
                         type='text'
@@ -48,6 +51,16 @@ export function StatusReply() {
                 </Box>
 
                 <Box display={'flex'}>
+                <FormControl>
+                        <FormLabel
+                            cursor={'pointer'}
+                            display={'flex'}
+                            color={'green'}
+                            fontSize={'25px'}><LuImagePlus /></FormLabel>
+                        <Input type='file' {...register('image')} hidden name="image"/>
+                        <ErrorMessage message={errors.image?.message || ''} />
+                    </FormControl>
+
                     <Button
                         type='submit'
                         border={'none'}
@@ -58,7 +71,7 @@ export function StatusReply() {
                         fontWeight={'bold'}
                         padding={'5px 30px'}
                         borderRadius={'15px'}
-                        color={'home.button.text'}
+                        color={'white'}
                         backgroundColor={'green'}
                         _hover={{ backgroundColor: 'home.button.hoverBackground', color: 'home.button.hoverText' }}>Reply</Button>
                 </Box>

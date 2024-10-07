@@ -1,4 +1,4 @@
-import { InputLeftElement, Input, InputGroup, Box, VStack, Text, Button } from "@chakra-ui/react";
+import { InputLeftElement, Input, InputGroup } from "@chakra-ui/react";
 import { RiUserSearchLine } from "react-icons/ri";
 import { useState, useEffect } from 'react';
 import { apiV1 } from "../../../libs/api";
@@ -55,13 +55,14 @@ export function SearchInput() {
                 alignItems={'center'}
                 justifyContent={'center'}>
                 <InputLeftElement
-                    left={'25px'}
+                    left={'80px'}
                     fontSize={'20px'}
                     pointerEvents="none"
                     children={<RiUserSearchLine style={{ color: '#B2B2B2', backgroundColor: '#3F3F3F' }} />} />
 
                 <Input
-                    ms={'13px'}
+                    ms={'17px'}
+                    mt={'2px'}
                     type='search'
                     bg={'#3F3F3F'}
                     p={'18px 40px'}

@@ -5,6 +5,7 @@ import { ProfilePeopleLayout } from "../features/home/layouts/layout-profile-p";
 import { SearchLayout } from "../features/home/layouts/layout-search";
 import { FollowLayout } from "../features/home/layouts/layout-follow";
 import { LayoutStatus } from "../features/home/layouts/layout-status";
+import { AuthLayout } from "../features/auth/layout/layout";
 import { ForgotRoute } from "./forgot";
 import { LoginRoute } from "./login";
 import {RegisterRoute} from "./register";
@@ -46,20 +47,25 @@ export function AppRouter() {
             ]
         },
         {
-            path: "/login",
-            element: <LoginRoute />,
-        },
-        {
-            path: "/register",
-            element: <RegisterRoute />,
-        },
-        {
-            path: "/reset",
-            element: <ResetRoute />,
-        },
-        {
-            path: "/forgot",
-            element: <ForgotRoute />,
+            element: <AuthLayout />,
+            children: [
+                {
+                    path: "/login",
+                    element: <LoginRoute />,
+                },
+                {
+                    path: "/register",
+                    element: <RegisterRoute />,
+                },
+                {
+                    path: "/reset",
+                    element: <ResetRoute />,
+                },
+                {
+                    path: "/forgot",
+                    element: <ForgotRoute />,
+                },
+            ]
         },
     ]);
 

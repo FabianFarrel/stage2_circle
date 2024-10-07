@@ -1,9 +1,13 @@
 import { Box, Image, Text } from "@chakra-ui/react";
 import LikeButton from "../buttons/like";
-import { useAllReplies } from "../hooks/use-all";
+import { useMediaReplies } from "../hooks/use-all";
 
-export function StatusItem() {
-    const { data } = useAllReplies();
+interface DetailItemProps {
+    selectedPostId: number | null;
+}
+
+export function DetailItem({ selectedPostId }: DetailItemProps) {
+    const { data } = selectedPostId ? useMediaReplies(selectedPostId) : { data: null };
     
     return (
         <>
@@ -30,7 +34,7 @@ export function StatusItem() {
                                     fontWeight={'bold'}>{reply.author.fullName}
                                     <Text
                                         as={'span'}
-                                        color={'grey'}
+                                        color={'#b8b8b8'}
                                         ms={'3px'}>@{reply.author.userName} • {reply.timeAgo}</Text>
                                 </Text>
 

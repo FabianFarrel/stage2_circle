@@ -1,10 +1,8 @@
-import { Box, Text, VStack, Image } from "@chakra-ui/react";
+import { Box, Image, Text } from "@chakra-ui/react";
 import { UserEntity } from "../../../entities/user";
-import { SearchNoResult } from "./search-no-result";
-import { FaComments } from "react-icons/fa";
-import LikeButton from "../buttons/like";
-import { ButtonLink } from "../buttons/link";
 import FollowButton from "../buttons/follow";
+import { ButtonLink } from "../buttons/link";
+import { SearchNoResult } from "./search-no-result";
 
 interface SearchResultProps {
     result: UserEntity[];
@@ -38,7 +36,7 @@ export function SearchResult({ result }: SearchResultProps) {
                                 boxSize='40px'
                                 display={'block'}
                                 borderRadius='500px'
-                                src='' />
+                                src={user.image} />
 
                             <ButtonLink textDecoration={'none'} state={user.id} to={`/profile-people/${user.id}`} bg={'none'}>
                                 <Text
@@ -51,11 +49,11 @@ export function SearchResult({ result }: SearchResultProps) {
                                     _hover={{ color: 'nav.button.hoverText' }}>{user.fullName}
                                     <Text
                                         fontSize={'10px'}
-                                        color={'nav.link'}>@{user.userName}</Text>
+                                        color={'#b8b8b8'}>@{user.userName}</Text>
                                 </Text>
                             </ButtonLink>
                         </Box>
-                        <Box bg={'none'}color={'white'}>
+                        <Box bg={'none'}>
                             <FollowButton userId={user.id} />
                         </Box>
                     </Box>

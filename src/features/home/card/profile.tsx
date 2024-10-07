@@ -4,7 +4,6 @@ import { ButtonLink } from "../buttons/link";
 import { ProfileModal } from "../modal/profile-modal";
 import { useUser } from "../hooks/use-user";
 
-
 export function ProfileCard() {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const initialRef = React.useRef(null);
@@ -33,7 +32,7 @@ export function ProfileCard() {
                     height={'100px'}
                     display={'block'}
                     borderRadius='10px'
-                    src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQl4u76xJAm7BiHyeq_CQT4cuBP6bL9r1byrw&s' />
+                    src={data?.background} />
 
                 <Image
                     top={'115px'}
@@ -43,7 +42,7 @@ export function ProfileCard() {
                     borderRadius='500px'
                     position={'absolute'}
                     border={'3px solid black'}
-                    src='https://images.unsplash.com/photo-1667053508464-eb11b394df83?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww' />
+                    src={data?.image} />
 
                 <Button
                     width={'25%'}
@@ -62,30 +61,25 @@ export function ProfileCard() {
                 <Box
                     marginTop={'43px'}
                     marginLeft={'10px'}
-                    color={'white'}
+                    color={'white   '}
                     bg={'transparent'}>
-                    
                         <Text
                             bg={'transparent'}
                             fontWeight="bold"
-                            fontSize="14px">✨ {data?.fullName} ✨</Text>
+                            fontSize="14px"> {data?.fullName} </Text>
 
-                    
                         <Text
                             bg={'transparent'}
-                            color={'nav.link'}
+                            color={'grey'}
                             fontSize="11px">@{data?.userName}</Text>
-
 
                         <Text
                             bg={'transparent'}
                             fontSize="11px">{data?.bio}</Text>
 
                     <HStack bg={'transparent'}>
-                        
-                        <Text fontSize="11px" bg={'transparent'}> {data?.following || 0} <Text color={'nav.link'} as={'span'} bg={'transparent'}>Following</Text></Text>   
-                        <Text fontSize="11px" bg={'transparent'}>{data?.followers || 0} <Text color={'nav.link'} as={'span'} bg={'transparent'}>Followers</Text></Text>
-
+                            <Text fontSize="11px" bg={'transparent'} > {data?.following || 0} <Text color={'#b8b8b8'} as={'span'} bg={'transparent'}>Following</Text></Text>
+                            <Text fontSize="11px" bg={'transparent'}>{data?.followers || 0} <Text color={'#b8b8b8'} as={'span'} bg={'transparent'}>Followers</Text></Text>
                     </HStack>
                 </Box>
             </Box>

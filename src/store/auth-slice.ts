@@ -1,5 +1,5 @@
 import { UserStoreDTO } from "../features/auth/types/dto";
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: UserStoreDTO = {} as UserStoreDTO;
 
@@ -13,7 +13,6 @@ const authSlice = createSlice({
                 id: action.payload.id,
                 fullName: action.payload.fullName,
                 email: action.payload.email,
-                role: action.payload.role
             };
         },
         removeUser() {

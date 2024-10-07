@@ -5,7 +5,6 @@ import { useAllUsers } from "../hooks/use-all";
 import { UserEntity } from "../../../entities/user";
 import { useEffect, useState } from "react";
 
-
 export function AccFollowCard() {
     const { data } = useAllUsers();
     const [randomUsers, setRandomUsers] = useState<UserEntity[]>([]);
@@ -15,7 +14,7 @@ export function AccFollowCard() {
         return shuffled.slice(0, 3);
     };
     useEffect(() => {
-        if (data) {
+        if (data && randomUsers.length === 0) {
             const selectedUsers = getRandomUsers(data);
             setRandomUsers(selectedUsers);
         }
@@ -42,7 +41,7 @@ export function AccFollowCard() {
                                 boxSize='40px'
                                 display={'block'}
                                 borderRadius='500px'
-                                src='' />
+                                src={user.image} />
 
                             <ButtonLink textDecoration={'none'} state={user.id} to={`/profile-people/${user.id}`} bg={'none'}>
                                 <Text
@@ -55,11 +54,11 @@ export function AccFollowCard() {
                                     _hover={{ color: 'nav.button.hoverText' }}>{user.fullName}
                                     <Text
                                         fontSize={'10px'}
-                                        color={'nav.link'}>@{user.userName}</Text>
+                                        color={'#b8b8b8'}>@{user.userName}</Text>
                                 </Text>
                             </ButtonLink>
                         </Box>
-                        <Box bg={'none'}color={'white'}>
+                        <Box bg={'none'}>
                             <FollowButton userId={user.id} />
                         </Box>
                     </Box>

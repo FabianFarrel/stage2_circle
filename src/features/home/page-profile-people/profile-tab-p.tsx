@@ -8,21 +8,49 @@ export function ProfileTabsPeople() {
             mt={'20px'}
             px={'25px'}
             pb={'15px'}
-            alignItems={'center'}
-            borderBottom={'1px solid #3F3F3F'}>
-
-            <Tabs variant={'unstyled'} position='relative' >
+            alignItems={'left'} // Changed from center to left for consistency
+        >
+            <Tabs variant={'unstyled'} position='relative'>
                 <TabList
+                    pb={'13px'}
                     display={'flex'}
                     color={'white'}
                     alignItems={'center'}
-                    pb={'13px'}
                     justifyContent={'center'}
-                    borderBottom={'1px solid #3F3F3F'}>
-                    <Tab w={'50%'} cursor={'pointer'} py={'3px'} border={'none'} color={'home.button.text'} _hover={{color:'home.hoverText'}} transition={'all 0.2s'}>All Post</Tab>
-                    <Tab w={'50%'} cursor={'pointer'} py={'3px'} border={'none'} color={'home.button.text'} _hover={{color:'home.hoverText'}} transition={'all 0.2s'}>Media</Tab>
+                    borderBottom={'1px solid #3F3F3F'}
+                >
+                    <Tab
+                        w={'50%'}
+                        cursor={'pointer'}
+                        py={'3px'}
+                        border={'none'}
+                        color={'home.text'} // Changed to match styling
+                        _hover={{ color: 'home.hoverText' }}
+                        transition={'all 0.2s'}
+                        _selected={{ color: 'green.500' }} // Added selected state for consistency
+                    >
+                        All Post
+                    </Tab>
+                    <Tab
+                        w={'50%'}
+                        cursor={'pointer'}
+                        py={'3px'}
+                        border={'none'}
+                        color={'home.text'} // Changed to match styling
+                        _hover={{ color: 'home.hoverText' }}
+                        transition={'all 0.2s'}
+                        _selected={{ color: 'green.500' }} // Added selected state for consistency
+                    >
+                        Media
+                    </Tab>
                 </TabList>
-                <TabIndicator height='2px' bg='home.hoverBackground' borderRadius='1px' />
+
+                <TabIndicator
+                    height='2px'
+                    bg='green.500' // Changed to match styling
+                    borderRadius='1px'
+                    mt='-1px' // Added margin to adjust position
+                />
 
                 <TabPanels>
                     <TabPanel width={'100%'}>
@@ -34,5 +62,5 @@ export function ProfileTabsPeople() {
                 </TabPanels>
             </Tabs>
         </Box>
-    )
+    );
 }

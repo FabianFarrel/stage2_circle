@@ -23,7 +23,7 @@ export function AccFollowingCard() {
                         <Button
                         padding={'5px 13px'}
                         height={'28px'}
-                        color={'#FFFFFF'}
+                        color={'white'}
                         fontSize={'10px'}
                         fontWeight={'700'}
                         bg={'transparent'}

@@ -1,14 +1,15 @@
 import { Box, Image, Text } from "@chakra-ui/react";
-import { FaComments } from "react-icons/fa";
-import { usePostDetail } from "../hooks/use-status";
-import { ButtonLink } from "../buttons/link";
-import { useParams } from "react-router-dom";
 import { format } from 'date-fns';
 import LikeButtonPost from "../buttons/like";
+import { ButtonLink } from "../buttons/link";
+import { usePostDetail } from "../hooks/use-status";
 
-export function StatusPost() {
-    const { postId } = useParams<{ postId: string }>();
-    const { postDetail } = usePostDetail(parseInt(postId!));
+interface DetailPostProps {
+    selectedPostId: number | null;
+}
+
+export function DetailPost({ selectedPostId }: DetailPostProps) {
+    const { postDetail } = selectedPostId ? usePostDetail(selectedPostId) : { postDetail: null };
     function formatCreatedAt(dateString: any) {
         try {
             const date = new Date(dateString);
@@ -41,8 +42,8 @@ export function StatusPost() {
 
                 <ButtonLink to={"/profile-people"}>
                     <Box ms={'10px'} fontSize={'12px'}>
-                        <Text fontWeight={'bold'}>{postDetail?.author.fullName}</Text>
-                        <Text color={'grey'}>@{postDetail?.author.userName} • {postDetail?.timeAgo}</Text>
+                        <Text fontWeight={'bold'} color={'white'}>{postDetail?.author.fullName}</Text>
+                        <Text color={'#b8b8b8'}>@{postDetail?.author.userName} • {postDetail?.timeAgo}</Text>
                     </Box>
                 </ButtonLink>
             </Box>
@@ -51,10 +52,9 @@ export function StatusPost() {
                 <Text mt={'5px'}>
                     {postDetail?.content}
                 </Text>
-                {postDetail?.image !== null && <Image my={'13px'} src={postDetail?.image} />}
                 <Text
                     fontSize={'12px'}
-                    color={'grey'}
+                    color={'#b8b8b8'}
                     mt={'10px'}>{postDetail?.createdAt ? formatCreatedAt(postDetail.createdAt) : "Date not available"}</Text>
 
                 <Text
@@ -67,16 +67,7 @@ export function StatusPost() {
                         ms={'5px'}
                         as={'span'}
                         fontSize={'12px'}
-                        color={'home.link'}>{postDetail?.likesCount}</Text>
-
-                    <ButtonLink to={"/status"} display={'flex'}>
-                        <FaComments style={{ color: '#909090', marginLeft: '20px' }} />
-                        <Text
-                            ms={'5px'}
-                            as={'span'}
-                            fontSize={'12px'}
-                            color={'home.link'}>{postDetail?.repliesCount} Replies</Text>
-                    </ButtonLink>
+                        color={'white'}>{postDetail?.likesCount}</Text>
                 </Text>
             </Box>
         </Box>

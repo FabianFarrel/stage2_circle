@@ -1,4 +1,3 @@
-
 import { Box, Button, HStack, Image, Text, useDisclosure } from "@chakra-ui/react";
 import React from "react";
 import { ProfileModal } from "../modal/profile-modal";
@@ -9,7 +8,7 @@ export function ProfileStatus() {
     const initialRef = React.useRef(null);
     const finalRef = React.useRef(null);
     const { data } = useUser();
-
+    
     return (
         <Box
             mt={'10px'}
@@ -20,7 +19,7 @@ export function ProfileStatus() {
                 height={'100px'}
                 display={'block'}
                 borderRadius='10px'
-                src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQl4u76xJAm7BiHyeq_CQT4cuBP6bL9r1byrw&s' />
+                src={data?.background} />
 
             <Box
                 mt={'-35px'}
@@ -33,7 +32,7 @@ export function ProfileStatus() {
                     display={'block'}
                     borderRadius='500px'
                     border={'3px solid black'}
-                    src='https://images.unsplash.com/photo-1667053508464-eb11b394df83?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww' />
+                    src={data?.image} />
 
                 <Button
                     mt={'45px'}
@@ -56,13 +55,13 @@ export function ProfileStatus() {
                     <Text
                         fontSize="16px"
                         fontWeight="bold"
-                        bg={'transparent'}>✨ {data?.fullName} ✨</Text>
+                        bg={'transparent'}> {data?.fullName} </Text>
 
 
                     <Text
                         my={'1'}
                         fontSize="13px"
-                        color={'home.link'}
+                        color={'#b8b8b8'}
                         bg={'transparent'}>@{data?.userName}</Text>
 
 
@@ -78,7 +77,7 @@ export function ProfileStatus() {
                             bg={'transparent'}>{data?.following}
                             <Text
                                 as={'span'}
-                                color={'home.link'}
+                                color={'#b8b8b8'}
                                 bg={'transparent'}> Following</Text></Text>
     
                         <Text
@@ -86,7 +85,7 @@ export function ProfileStatus() {
                             bg={'transparent'}>{data?.followers}
                             <Text
                                 as={'span'}
-                                color={'home.link'}
+                                color={'#b8b8b8'}
                                 bg={'transparent'}> Followers</Text></Text>
                 </HStack>
             </Box>

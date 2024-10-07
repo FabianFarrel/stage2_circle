@@ -5,6 +5,7 @@ import { ProfileTabsPeople } from "../page-profile-people/profile-tab-p";
 export function ProfilePeopleLayout() {
     return(
         <>
+        
             <ProfileStatusPeople/>
             <ProfileTabsPeople/>
         </>

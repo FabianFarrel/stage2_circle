@@ -1,4 +1,3 @@
-
 import { Box, Modal, ModalBody, ModalCloseButton, ModalContent, ModalOverlay } from "@chakra-ui/react";
 import { RefObject } from "react";
 import { DetailImage } from "../page-detail/image-detail";
@@ -9,9 +8,11 @@ interface InitialFocusModalProps {
     onClose: () => void;
     initialRef: RefObject<HTMLInputElement>;
     finalRef: RefObject<HTMLButtonElement>;
+    selectedImage: string | null;
+    selectedPostId: number | null;
 }
 
-export function DetailLayout({ isOpen, onClose, initialRef, finalRef }: InitialFocusModalProps) {
+export function DetailLayout({ isOpen, onClose, initialRef, finalRef, selectedImage, selectedPostId }: InitialFocusModalProps) {
     return (
         <>
             <Modal
@@ -39,10 +40,10 @@ export function DetailLayout({ isOpen, onClose, initialRef, finalRef }: InitialF
                             border="1.5px solid #909090" />
                         <Box display={'flex'} width={'100%'} height={'130vh'}>
                             <Box flex={2} overflowY={'auto'} borderRight={'1px solid #545454'}>
-                                <DetailImage />
+                                <DetailImage selectedImage={selectedImage}/>
                             </Box>
                             <Box flex={1.4} overflowX={'auto'}>
-                                <DetailRightNavbar />
+                                <DetailRightNavbar selectedPostId={selectedPostId} />
                             </Box>
                         </Box>
                     </ModalBody>

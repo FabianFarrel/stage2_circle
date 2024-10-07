@@ -1,11 +1,18 @@
-import { Box, Image, Text } from "@chakra-ui/react";
+import { Box, Image, Text, useDisclosure } from "@chakra-ui/react";
 import { FaComments } from "react-icons/fa";
+import LikeButtonPost from "../buttons/like";
 import { ButtonLink } from "../buttons/link";
-import LikeButton from "../buttons/like";
 import { useAllPosts } from "../hooks/use-all";
+import { DetailLayout } from "../layouts/layout-detail";
+import React, { useState } from "react";
 
 export function HomeItem() {
     const { data } = useAllPosts();
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const initialRef = React.useRef(null);
+    const finalRef = React.useRef(null);
+    const [selectedImage, setSelectedImage] = useState<string | null>(null);
+    const [selectedPostId, setSelectedPostId] = useState<number | null>(null);
 
     return (
         <>
@@ -14,71 +21,72 @@ export function HomeItem() {
                     <Box
                         mt={'20px'}
                         px={'25px'}
+                        className={`${post.id}`}
                         pb={'15px'}
                         key={post.id}
-                        color={'home.text'}
+                        color={'white'}
                         alignItems={'center'}
                         borderBottom={'1px solid #3F3F3F'}>
-                        <Box
-                            display={'flex'}>
+                        <Box display={'flex'} >
                             <Image
-                                alt=''
+                                alt={post.author.image || 'Author'}
                                 boxSize='40px'
-                                borderRadius='500px'
-                                src='https://images.unsplash.com/photo-1667053508464-eb11b394df83?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww' />
-
-                            <Box ms={'10px'}>
+                                borderRadius='full'
+                                src={post.author.image || '/path/to/fallback-image.jpg'} />
+                                
+                            <Box ms={'10px'} w={'430px'}>
                                 <Text
                                     fontSize={'12px'}
-                                    color={'white'}
-                                    fontWeight={'bold'}>{post.author.fullName}
+                                    fontWeight={'bold'}>
+                                    {post.author.fullName}
                                     <Text
                                         as={'span'}
-                                        color={'white'}
-                                        ms={'3px'}>@{post.author.userName} • {post.timeAgo}</Text>
+                                        color={'grey'}
+                                        ms={'3px'}>
+                                        @{post.author.userName} • {post.timeAgo}
+                                    </Text>
                                 </Text>
 
                                 <Text
                                     fontSize={'12px'}
-                                    color={'white'}
-                                    mt={'5px'}>{post.content}</Text>
+                                    mt={'5px'}>
+                                    {post.content}
+                                </Text>
 
-{post.image !== null && (
-    <Image 
-        src={post.image}
-        alt="Post Image"
-        borderRadius="md" 
-        boxSize="300px" 
-        objectFit="cover" 
-        margin="10px auto" 
-        boxShadow="lg" 
-        transition="transform 0.2s" 
-        
-    />
-)}
+                                {post.image !== null && (
+                                    <Image
+                                        my={'13px'}
+                                        src={post.image}
+                                        onClick={() => {
+                                            setSelectedImage(post.image as string | null);
+                                            setSelectedPostId(post.id);
+                                            onOpen();
+                                        }}
+                                    />
+                                )}
 
                                 <Text
                                     mt={'15px'}
                                     display={'flex'}
                                     fontSize={'20px'}
                                     alignItems={'center'}>
-                                    <LikeButton postId={post.id}  />
+                                    <LikeButtonPost postId={post.id} />
                                     <Text
                                         as={'span'}
-                                        mb={'1px'}
-                                        
-                                        color={'white'}
-                                        fontSize={'12px'}>{post.likesCount}</Text>
+                                        color={'home.link'}
+                                        fontSize={'12px'}>
+                                        {post.likesCount}
+                                    </Text>
 
-                                    <FaComments style={{ color: '#909099', marginLeft: '20px',marginBottom:'5px',marginTop:'5px' }} />
+                                    <FaComments style={{ color: '#909090', marginLeft: '20px' }} />
                                     <ButtonLink state={post.id} to={`/status/${post.id}`} display={'flex'}>
                                         <Text
-                                            mb={'1px'}
-                                            
                                             ms={'5px'}
                                             as={'span'}
-                                            color={'white'}
-                                            fontSize={'12px'}>{post.repliesCount} Replies</Text>
+                                            color={'home.link'}
+                                            fontSize={'12px'}>
+                                            {post.repliesCount} Replies
+                                        </Text>
                                     </ButtonLink>
                                 </Text>
                             </Box>
@@ -86,6 +94,13 @@ export function HomeItem() {
                     </Box>
                 )
             })}
+            <DetailLayout
+                isOpen={isOpen}
+                onClose={onClose}
+                initialRef={initialRef}
+                finalRef={finalRef}
+                selectedImage={selectedImage}
+                selectedPostId={selectedPostId} />
         </>
     )
 }

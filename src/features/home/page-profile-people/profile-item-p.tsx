@@ -8,9 +8,13 @@ export function ProfilePostPeople() {
     const { data } = usePostProfile();
 
     if (!data || data.length === 0) {
-        return <Box justifyContent={'center'} display={'flex'} alignItems={'center'} flexDirection={'column'} mt={'30px'} pb={'15px'}>
-            <Heading as={'text'} color={'white'} fontSize={'15px'}>I think this user dont have any post yet</Heading>
-        </Box>
+        return (
+            <Box justifyContent={'center'} display={'flex'} alignItems={'center'} flexDirection={'column'} mt={'30px'} pb={'15px'}>
+                <Heading as={'text'} color={'white'} fontSize={'15px'}>
+                    I think this user doesn't have any posts yet
+                </Heading>
+            </Box>
+        );
     }
 
     return (
@@ -23,45 +27,60 @@ export function ProfilePostPeople() {
                         key={post.id}
                         display={'flex'}
                         color={'#FFFFFF'}
-                        alignItems={'center'}>
-                        <Box
-                            display={'flex'}>
+                        alignItems={'center'}
+                        borderBottom={'1px solid #3F3F3F'} // Adding a bottom border for separation
+                    >
+                        <Box display={'flex'}>
                             <Image
-                                alt=''
+                                alt='Profile picture'
                                 boxSize='40px'
                                 borderRadius='500px'
-                                src='https://images.unsplash.com/photo-1667053508464-eb11b394df83?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww' />
+                                src={post.author.image}
+                            />
 
                             <Box ms={'10px'}>
-                                <Text fontSize={'12px'} fontWeight={'bold'}>{post.author.fullName} <Text as={'span'} color={'#909090'} ms={'3px'}>@{post.author.userName} • 4h</Text></Text>
+                                <Text fontSize={'12px'} fontWeight={'bold'}>
+                                    {post.author.fullName}
+                                    <Text as={'span'} color={'#909090'} ms={'3px'}>
+                                        @{post.author.userName} • 4h
+                                    </Text>
+                                </Text>
                                 <Text fontSize={'12px'} mt={'5px'}>{post.content}</Text>
+
+                                {/* Display the post image if available */}
+                                {post.image && (
+                                    <Image
+                                        src={post.image}
+                                        alt="Post Image"
+                                        boxSize="200px"
+                                        objectFit="cover"
+                                        mt="10px"
+                                        borderRadius="8px"
+                                    />
+                                )}
+
                                 <Text display={'flex'} alignItems={'center'} mt={'15px'} fontSize={'20px'}>
-                                    <Text
-                                        mt={'15px'}
-                                        display={'flex'}
-                                        fontSize={'20px'}
-                                        alignItems={'center'}>
-                                        <LikeButton postId={post.id} />
+                                    <LikeButton postId={post.id} />
+                                    <Text as={'span'} ms={'5px'} color={'white'} fontSize={'12px'}>
+                                        {post.likesCount}
+                                    </Text>
+
+                                    <FaComments style={{ color: '#909090', marginLeft: '20px' }} />
+                                    <ButtonLink state={post.id} to={`/status/${post.id}`} display={'flex'}>
                                         <Text
+                                            ms={'5px'}
                                             as={'span'}
                                             color={'home.link'}
-                                            fontSize={'12px'}>{post.likesCount}</Text>
-
-                                        <FaComments style={{ color: '#909090', marginLeft: '20px' }} />
-                                        <ButtonLink state={post.id} to={`/status/${post.id}`} display={'flex'}>
-                                            <Text
-                                                ms={'5px'}
-                                                as={'span'}
-                                                color={'home.link'}
-                                                fontSize={'12px'}>{post.repliesCount} Replies</Text>
-                                        </ButtonLink>
-                                    </Text>
+                                            fontSize={'12px'}>
+                                            {post.repliesCount} Replies
+                                        </Text>
+                                    </ButtonLink>
                                 </Text>
                             </Box>
                         </Box>
                     </Box>
-                )
+                );
             })}
         </>
-    )
+    );
 }
