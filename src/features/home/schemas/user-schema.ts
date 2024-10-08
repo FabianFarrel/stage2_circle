@@ -3,7 +3,7 @@ import { string, z } from "zod";
 export const updateUserSchema = z.object({
     fullName : string(),
     userName : string(),
-    bio : string(),
+    bio: string().optional(),
     image: z.instanceof(FileList).optional(),
     background: z.instanceof(FileList).optional()
 });

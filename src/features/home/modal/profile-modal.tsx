@@ -147,7 +147,7 @@ export function ProfileModal({ isOpen, onClose, initialRef, finalRef }: InitialF
                                                 resize={'none'}
                                                 border={'none'}
                                                 fontSize={'14px'}
-                                                value={data?.bio}
+                                                defaultValue={data?.bio || ''}
                                                 color={'home.text'}
                                                 {...register("bio")}
                                                 _focusVisible={{

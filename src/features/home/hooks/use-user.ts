@@ -42,14 +42,16 @@ export function useUser() {
         if (data.fullName) {
             formData.append('fullName', data.fullName);
         }
-    
+        if (data.bio) {
+            formData.append('bio', data.bio);
+        }
         if (data.image && data.image[0]) {
             formData.append('image', data.image[0]);
         }
         if (data.background && data.background[0]) {
             formData.append('background', data.background[0]);
         }
-    
+
         try {
             const response = await apiV1.put<null, { data: UserEntity }>(
                 `/user`, 
@@ -81,6 +83,7 @@ export function useUser() {
             fullName: data.fullName,
             image: data.image,
             background: data.background,
+            bio:data.bio,
         };
     
         const profilePromise = updateUserAsync(updateUser);
