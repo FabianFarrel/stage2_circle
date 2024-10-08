@@ -90,10 +90,9 @@ model Follow {
 }
 
 model Like {
-  id      Int @id @default(autoincrement())
-  userId  Int
-  postId  Int
-  replyId Int
+  id     Int @id @default(autoincrement())
+  userId Int
+  postId Int
 
   user User @relation(fields: [userId], references: [id])
   post Post @relation(fields: [postId], references: [id])

@@ -7,7 +7,7 @@ CREATE TABLE "users" (
     "fullName" TEXT,
     "userName" TEXT,
     "bio" TEXT,
-    "role" "RoleEnum" NOT NULL DEFAULT 'MEMBER',
+    /*"role" "RoleEnum" NOT NULL DEFAULT 'MEMBER',*/
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 

@@ -79,12 +79,13 @@ class userController {
             }
     
             const body = {
-                ...req.body,
+                ...req.body,  
+                bio: req.body.bio,
                 ...(imageUrl && { image: imageUrl }),
                 ...(backgroundUrl && { background: backgroundUrl })
             };
+            console.log("Request body: ", req.body);
     
-            // Log the body for debugging
             console.log("Request body after parsing: ", body);
     
             const value = await updateUserSchema.validateAsync(body);

@@ -59,7 +59,7 @@ class UserService {
 
 
     async updateUser(id: number, data: UpdateUserDTO
-    ): Promise<{ user: Pick<User, "fullName" | "userName" | "bio" | "image" | "id" | "background"> }> {
+    ): Promise<{ user: Pick<User, "fullName" | "userName" | "background" | "image" | "id" |"bio" > }> {
         const user = await prisma.user.findUnique({
             where: {
                 id
@@ -75,9 +75,9 @@ class UserService {
             data: {
                 fullName: data.fullName || user.fullName,
                 userName: data.userName || user.userName,
-                bio: data.bio || user.bio,
                 image: data.image || user.image,
-                background: data.background || user.background
+                background: data.background || user.background,
+                bio: data.bio || user.bio,
             },
             select: {
                 id: true,
