@@ -36,7 +36,7 @@ export function ProfileStatus() {
 
                 <Button
                     mt={'45px'}
-                    width={'25%'}
+                    width={'17%'}
                     height={'28px'}
                     onClick={onOpen}
                     fontSize={'10px'}

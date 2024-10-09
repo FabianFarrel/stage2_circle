@@ -13,6 +13,7 @@ export function ProfileLayout() {
         <>
             <ButtonLink onClick={() => navigate(-1)} color={'white'} textDecoration={'none'} to={"/"} bg={'none'}>
                 <Text
+                fontSize={'20px'}
                     as={'h2'}
                     mt={'15px'}
                     px={'25px'}

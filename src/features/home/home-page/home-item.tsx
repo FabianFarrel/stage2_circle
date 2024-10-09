@@ -56,6 +56,7 @@ export function HomeItem() {
                                 {post.image !== null && (
                                     <Image
                                         my={'13px'}
+                                        objectFit={'cover'} 
                                         src={post.image}
                                         onClick={() => {
                                             setSelectedImage(post.image as string | null);

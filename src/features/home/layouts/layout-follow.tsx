@@ -1,17 +1,18 @@
 import { Box, Text } from "@chakra-ui/react";
-import { Follows } from "../follow/other";
+import { FollowItem } from "../follow/other";
 
 export function FollowLayout() {
     return (
         <Box
+            fontSize={'30px'}
             mt={'20px'}
             px={'25px'}
             pb={'20px'}
             alignItems={'center'}
             justifyContent={'center'}>
-            <Text color={'white'} as={'h1'}>Follows</Text>
+            <Text color={'white'} as={'h1'}><b>Follows</b></Text>
 
-            <Follows />
+            <FollowItem />
         </Box>
     )
 }

@@ -56,7 +56,7 @@ export function HomePost() {
                         <FormLabel
                             cursor={'pointer'}
                             display={'flex'}
-                            color={'green'}
+                            color={'#04A51E'}
                             fontSize={'25px'}><LuImagePlus /></FormLabel>
                         <Input type='file' {...register('image')} hidden name="image" />
                         <ErrorMessage message={errors.image?.message || ''} />
@@ -74,7 +74,7 @@ export function HomePost() {
                         borderRadius={'15px'}
                         disabled={isSubmitting}
                         color={'white'}
-                        backgroundColor={'green'}
+                        backgroundColor={'#04A51E'}
                         _hover={{ backgroundColor: 'home.button.hoverBackground', color: 'home.button.hoverText' }}>
                         {isSubmitting ? <Spinner size="sm" /> : 'Post'}
                     </Button>

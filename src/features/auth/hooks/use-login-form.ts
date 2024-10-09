@@ -8,7 +8,7 @@ import { LoginFormInput, loginSchema } from '../schemas/login';
 import { LoginRequestDTO, LoginResponseDTO } from '../types/login-dto';
 import { apiV1 } from '../../../libs/api';
 import { useToast } from '@chakra-ui/react';
-import { useNavigate } from 'react-router-dom';  // Import useNavigate
+import { useNavigate } from 'react-router-dom';  
 
 export function useLoginForm() {
     const { register, handleSubmit, setError, formState: { errors } } = useForm<LoginFormInput>({
@@ -56,7 +56,7 @@ export function useLoginForm() {
             if (axios.isAxiosError(error) && error.response) {
                 const stackMessage = error.response.data.message;
                 if (stackMessage.includes('Email')) {
-                    setError('email', {
+                    setError('userName', {
                         message: error.response.data.message,
                     });
                 }

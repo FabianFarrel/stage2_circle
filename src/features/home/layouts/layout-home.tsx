@@ -6,11 +6,11 @@ export function HomeLayout() {
     return(
         <>
             <Text
-                fontSize={'20px'}
+                fontSize={'30px'}
                 mt={'20px'} 
                 mb={'15px'}
                 px={'25px'} 
-                color={'white'}>Home</Text>
+                color={'white'}><b>Home</b></Text>
             <HomePost />
             <HomeItem />
         </>

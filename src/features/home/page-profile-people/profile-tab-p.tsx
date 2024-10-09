@@ -8,7 +8,7 @@ export function ProfileTabsPeople() {
             mt={'20px'}
             px={'25px'}
             pb={'15px'}
-            alignItems={'left'} // Changed from center to left for consistency
+            alignItems={'left'}
         >
             <Tabs variant={'unstyled'} position='relative'>
                 <TabList
@@ -24,22 +24,24 @@ export function ProfileTabsPeople() {
                         cursor={'pointer'}
                         py={'3px'}
                         border={'none'}
-                        color={'home.text'} // Changed to match styling
+                        color={'home.text'}
                         _hover={{ color: 'home.hoverText' }}
                         transition={'all 0.2s'}
-                        _selected={{ color: 'green.500' }} // Added selected state for consistency
+                        _selected={{ color: 'green.500' }}
+                        aria-label="All Posts Tab"
                     >
-                        All Post
+                        All Posts
                     </Tab>
                     <Tab
                         w={'50%'}
                         cursor={'pointer'}
                         py={'3px'}
                         border={'none'}
-                        color={'home.text'} // Changed to match styling
+                        color={'home.text'}
                         _hover={{ color: 'home.hoverText' }}
                         transition={'all 0.2s'}
-                        _selected={{ color: 'green.500' }} // Added selected state for consistency
+                        _selected={{ color: 'green.500' }}
+                        aria-label="Media Tab"
                     >
                         Media
                     </Tab>
@@ -47,16 +49,16 @@ export function ProfileTabsPeople() {
 
                 <TabIndicator
                     height='2px'
-                    bg='green.500' // Changed to match styling
+                    bg='green.500'
                     borderRadius='1px'
-                    mt='-1px' // Added margin to adjust position
+                    mt='-1px'
                 />
 
                 <TabPanels>
-                    <TabPanel width={'100%'}>
+                    <TabPanel width={'100%'} key="posts">
                         <ProfilePostPeople />
                     </TabPanel>
-                    <TabPanel>
+                    <TabPanel key="media">
                         <ProfileMediaPeople />
                     </TabPanel>
                 </TabPanels>

@@ -9,7 +9,7 @@ interface FollowButtonProps {
 }
 
 const FollowButton: React.FC<FollowButtonProps> = ({ userId }) => {
-    const [isFollow, setIsFollow] = React.useState(false);
+    const [__isFollow, setIsFollow] = React.useState(false);
     const [buttonText, setButtonText] = useState<string>("Follow");
 
     const queryClient = useQueryClient();
@@ -24,7 +24,7 @@ const FollowButton: React.FC<FollowButtonProps> = ({ userId }) => {
                 });
 
                 setIsFollow(response.data.isFollowing);
-                setButtonText(response.data.isFollowing ? "Following" : "Follow");
+                setButtonText(response.data.isFollowing ? "Unfollow" : "Follow");
             } catch (error) {
                 console.error("Error fetching follow status:", error);
             }
@@ -47,15 +47,11 @@ const FollowButton: React.FC<FollowButtonProps> = ({ userId }) => {
             const newFollowStatus = response.data.isFollowing;
 
             setIsFollow(newFollowStatus);
-            setButtonText(newFollowStatus ? "Following" : "Follow");
+            setButtonText(newFollowStatus ? "Unfollow" : "Follow");
 
-            // Define query filters explicitly
-            const userQueryKey: QueryKey = ['user', userId];
-            const followStatusQueryKey: QueryKey = ['follow-status', userId];
-
-            // Invalidate queries with correct key
-            queryClient.invalidateQueries({ queryKey: userQueryKey });
-            queryClient.invalidateQueries({ queryKey: followStatusQueryKey });
+            // Invalidate queries related to followers/following
+            const followingQueryKey: QueryKey = ['following', userId];
+            queryClient.invalidateQueries({ queryKey: followingQueryKey });
 
         } catch (error) {
             console.error("Error toggling follow status:", error);

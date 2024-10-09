@@ -5,27 +5,29 @@ import { RegisterForm } from "../features/auth/components/register-form";
 export function RegisterRoute() {
     return (
         <Box
-        mx="auto"
-        width="100%"
-        height='729px'
-        alignItems="center"
-        justifyContent="center"
-        backgroundColor="#1D1D1D"  
-        p="20px"  
-        borderRadius="0px" >
-            
+            mx="auto"
+            width="100%"
+            height='729px'
+            alignItems="center"
+            justifyContent="center"
+            backgroundColor="#1D1D1D"  
+            p="20px"  
+            borderRadius="0px" 
+        >
             <Text 
                 as='h1' 
                 mx="auto"
-                mt={"20px"}
+                mt={"50px"}
                 color="#04A51E"
                 width={"300px"}
                 display={"flex"}
-                fontSize={"30px"}
+                fontSize={"40px"}
                 fontWeight={"bold"}
                 alignItems="center" 
                 justifyContent="start"
-                >circle</Text>
+            >
+                Circle
+            </Text>
 
             <Text 
                 as='h2'
@@ -34,7 +36,10 @@ export function RegisterRoute() {
                 color="#FFFFFF"
                 display={"flex"}
                 alignItems="center" 
-                justifyContent="start">Create account Circle</Text>
+                justifyContent="start"
+            >
+                Create account Circle
+            </Text>
 
             <RegisterForm />
 
@@ -47,15 +52,19 @@ export function RegisterRoute() {
                 display={"flex"}
                 color={'#FFFFFF'}
                 alignItems="center" 
-                justifyContent="start">Already have an account?
+                justifyContent="start"
+            >
+                Already have an account? 
                 <Link to={"/login"} style={{ textDecoration: 'none' }}>
-                <Text 
-                    href="" 
-                    as={'a'} 
-                    color={'#04A51E'} 
-                    textDecoration={'none'}>Login</Text>
+                    <Text 
+                        as='span' // Changed to 'span' to prevent nesting issues
+                        color={'#04A51E'} 
+                        textDecoration={'none'}
+                    >
+                        Login
+                    </Text>
                 </Link>
             </Text>
         </Box>
-    )
+    );
 }

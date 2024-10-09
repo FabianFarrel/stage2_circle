@@ -2,7 +2,7 @@ import { UserEntity } from "../../../entities/user";
 
 export type LoginRequestDTO = Pick<
     UserEntity, 
-    "email" | "password"
+    "userName" | "password"
 >;
 
 export type LoginResponseDTO = {

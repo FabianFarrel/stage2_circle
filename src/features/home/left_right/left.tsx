@@ -16,17 +16,18 @@ export function SideLeftNavbar() {
     const logout = useLogout();
 
     return (
-        <Box>
+        <Box ml={'20px'}>
             <Heading
                 as='h1'
                 ms={'20px'}
-                color="green"
+                color={'#04A51E'}
                 display={"flex"}
-                fontSize={'40px'}
+                fontSize={'70px'}
                 paddingTop={'20px'}
                 paddingBottom={'5px'}>circle</Heading>
 
             <UnorderedList
+                ml={'35px'}
                 gap={'30px'}
                 width={'235px'}
                 display={'flex'}
@@ -91,7 +92,7 @@ export function SideLeftNavbar() {
                         cursor={'pointer'}
                         fontWeight={'bold'}
                         borderRadius={'20px'}
-                        backgroundColor={'green'}
+                        backgroundColor={'#04A51E'}
                         transition={'all 0.2s ease-in-out'}
                         _hover={{ backgroundColor: 'nav.button.hoverBackground', color: 'nav.button.hoverText' }}>Create Post</Button>
                 </ListItem>

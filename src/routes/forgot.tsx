@@ -17,7 +17,7 @@ export function ForgotRoute() {
             <Heading 
                 as='h1' 
                 mx="auto"
-                mt="30px"
+                mt="50px"
                 color="#04A51E"
                 width="300px"
                 display="flex"

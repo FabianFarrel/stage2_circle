@@ -1,4 +1,4 @@
-import { ReplyEntity } from "./reply";
+ import { ReplyEntity } from "./reply";
 import { UserEntity } from "./user";
 
 export interface GetPostEntity {

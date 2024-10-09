@@ -27,7 +27,7 @@ export function ProfileTabs() {
                         color={'home.text'} 
                         _hover={{ color: 'home.hoverText' }} 
                         transition={'all 0.2s'} 
-                        _selected={{ color: 'green.500' }} 
+                        _selected={{ color: 'white' }} 
                     >
                         All Post
                     </Tab>
@@ -39,7 +39,7 @@ export function ProfileTabs() {
                         color={'home.text'} 
                         _hover={{ color: 'home.hoverText' }} 
                         transition={'all 0.2s'} 
-                        _selected={{ color: 'green.500' }} 
+                        _selected={{ color: 'white' }} 
                     >
                         Media
                     </Tab>
@@ -47,7 +47,7 @@ export function ProfileTabs() {
                 
                 <TabIndicator 
                     height='2px' 
-                    bg='green.500' 
+                    bg='#04A51E' 
                     borderRadius='1px' 
                     mt='-1px' 
                 />
