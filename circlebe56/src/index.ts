@@ -14,7 +14,10 @@ const port = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:5173',  // Frontend URL
+    credentials: true,  // If you are sending cookies
+}));
 app.use('/uploadImage', express.static('uploadImage'));
 app.use("/docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument, {
     explorer: true,
